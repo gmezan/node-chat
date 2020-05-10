@@ -2,6 +2,8 @@
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
+var connectedUsers = 0;
+var users = {};
 
 //configs
 var app = express();
@@ -10,7 +12,7 @@ var io = socketIO(server);
 
 //server init
 server.listen(80,function(){
-    console.log("Servidor corriendo en el puerto 80");
+    console.log("Server running on port: 80");
 });
 
 //express routes
@@ -20,16 +22,24 @@ app.get('/',function (req, res) {
 
 //Socket io
 io.on('connection', function (socket) {		
-	console.log("Usuario Conectado");
+	console.log("Connected user");
+	connectedUsers++;
+
+
+
+	io.emit('connUsers', connectedUsers);
 
 	socket.on('disconnect', function(){
-    	console.log('Usuario Desconectado');
+		connectedUsers--;
+    	console.log('Disconnected user');
+    	io.emit('connUsers', connectedUsers);
   	});
 
 	socket.on('chat message',function(msg){
   		console.log("Mensaje del cliente: " + msg);
   		io.emit('mensaje',msg);
 	})
+
 
 });
 

@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
 	<link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 	<head>
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
@@ -18,10 +20,13 @@
     	</style>
 	</head>
 	<body>
-    	<ul id="messages"></ul>
-    	<form action="">
-      		<input id="m" autocomplete="off" /><button>Send</button>
-    	</form>		
+    	<div class="container-fluid p-5" >
+        <div>Connected users: <span id="connUsers"></span></div>
+          <ul id="messages"></ul>
+          <form action="">
+              <input id="m" autocomplete="off" /><button>Send</button>
+          </form>   
+      </div>
 
 	</body>
 
@@ -29,8 +34,19 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script>
+        $(document).scrollTop($(document).height());
   			$(function () {
     			var socket = io();
+
+          var username = prompt("Ingrese su nombre");
+
+            if (username == null || username == "") {
+                alert("Debe Ingresar un nombre para utilizar el chat, refresque la página");
+            } else {
+              var socket = io();
+
+              socket.emit('username', username);
+
     			$('form').submit(function(){
       			socket.emit('chat message', $('#m').val());
       			$('#m').val('');
@@ -44,6 +60,11 @@
  			});
 		</script>
 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
 </html>
