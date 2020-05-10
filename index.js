@@ -41,7 +41,7 @@ io.on('connection', function (socket) {
 
 	socket.on('chat message',function(msg){
   		console.log("Mensaje del cliente: " + msg);
-  		io.emit('mensaje',msg);
+  		//io.emit('mensaje',msg);
   		socket.broadcast.emit('mensaje', {username: users[socket.id], msg: msg});
 	})
 
