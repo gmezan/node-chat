@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<link rel="shortcut icon" href="#" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -21,6 +21,7 @@
 	</head>
 	<body>
     	<div class="container-fluid p-5" >
+        <div class="text"> <h2>Normal?</h2></div>
         <div>Connected users: <span id="connUsers"></span></div>
           <ul id="messages"></ul>
           <form action="">
@@ -34,17 +35,17 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script>
-        $(document).scrollTop($(document).height());
+        
   			$(function () {
-    			var socket = io();
+          $(document).scrollTop($(document).height());
 
-          var username = prompt("Ingrese su nombre");
+    			var socket = io();
+          var username = prompt("Your nickname:");
 
             if (username == null || username == "") {
-                alert("Debe Ingresar un nombre para utilizar el chat, refresque la página");
+                alert("You need a username, reload the page and try again");
             } else {
               var socket = io();
-
               socket.emit('username', username);}
 
     			$('form').submit(function(){

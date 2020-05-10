@@ -26,6 +26,10 @@ io.on('connection', function (socket) {
 	connectedUsers++;
 
 
+	socket.on('username',function(username){
+	  		users[socket.id] = username;
+	  		console.log(users);
+	  	});
 
 	io.emit('connUsers', connectedUsers);
 
@@ -38,8 +42,10 @@ io.on('connection', function (socket) {
 	socket.on('chat message',function(msg){
   		console.log("Mensaje del cliente: " + msg);
   		io.emit('mensaje',msg);
+  		socket.broadcast.emit('mensaje', {username: users[socket.id], msg: msg});
 	})
 
+	
 
 });
 
