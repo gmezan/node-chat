@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<link rel="shortcut icon" href="#" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
 
 	<head>
 		<script src="/socket.io/socket.io.js"></script>
@@ -18,11 +17,13 @@
       		#messages li { padding: 5px 10px; }
       		#messages li:nth-child(odd) { background: #eee; }
     	</style>
+      <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	</head>
 	<body>
     	<div class="container-fluid p-5" >
         <div class="text"> <h2>Normal?</h2></div>
-        <div>Connected users: <span id="connUsers"></span></div>
+        <h3>Connected users: <span id="connUsers"></span></h3>
           <ul id="messages"></ul>
           <form action="">
               <input id="m" autocomplete="off" /><button>Send</button>
