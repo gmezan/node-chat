@@ -4,6 +4,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 var connectedUsers = 0;
 var users = {};
+var counter = 0;
 
 //configs
 var app = express();
@@ -24,6 +25,8 @@ app.get('/',function (req, res) {
 io.on('connection', function (socket) {		
 	console.log("Connected user");
 	connectedUsers++;
+	counter++;
+	console.log(counter);
 
 
 	socket.on('username',function(username){
@@ -41,8 +44,8 @@ io.on('connection', function (socket) {
 
 	socket.on('chat message',function(msg){
   		console.log("Mensaje del cliente: " + msg);
-  		//io.emit('mensaje',msg);
-  		socket.broadcast.emit('mensaje', {username: users[socket.id], msg: msg});
+  		io.emit('mensaje', users[socket.id] + " " + msg);
+  		//socket.broadcast.emit('mensaje', {username: users[socket.id], msg: msg});
 	})
 
 	
