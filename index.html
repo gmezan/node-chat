@@ -45,23 +45,23 @@
             } else {
               var socket = io();
 
-              socket.emit('username', username);
+              socket.emit('username', username);}
 
     			$('form').submit(function(){
       			socket.emit('chat message', $('#m').val());
       			$('#m').val('');
       			return false;
     			});
+			
+			socket.on('mensaje', function(msg){
+    				$('#messages').append($('<li>').text(msg));
+    			})
 
-          socket.on('connUsers',function(msg) {
+      socket.on('connUsers',function(msg) {
             // body...
             $('#connUsers').text(msg);
 
           })
-			
-    			socket.on('mensaje', function(msg){
-        				$('#messages').append($('<li>').text(msg));
-        			})
 
  			});
 		</script>
