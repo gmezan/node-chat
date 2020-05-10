@@ -34,17 +34,17 @@ io.on('connection', function (socket) {
 	  		console.log(users);
 	  	});
 
-	io.emit('connUsers', connectedUsers);
+	io.emit('connUsers', Math.floor((connectedUsers+1)/3));
 
 	socket.on('disconnect', function(){
 		connectedUsers--;
     	console.log('Disconnected user');
-    	io.emit('connUsers', connectedUsers);
+    	io.emit('connUsers', Math.floor((connectedUsers+1)/3));
   	});
 
 	socket.on('chat message',function(msg){
   		console.log("Mensaje del cliente: " + msg);
-  		io.emit('mensaje', users[socket.id] + ":  " + msg);
+  		io.emit('mensaje', {username: users[socket.id], msg: msg});
   		//socket.broadcast.emit('mensaje', {username: users[socket.id], msg: msg});
 	})
 

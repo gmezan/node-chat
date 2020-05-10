@@ -23,7 +23,7 @@
 	<body>
     	<div class="container-fluid p-5" >
         <div class="text"> <h2>Normal?</h2></div>
-        <h3>Connected users: <span id="connUsers"></span></h3>
+        <h5><strong>Connected users: <span id="connUsers"></span></strong></h5>
           <ul id="messages"></ul>
           <form action="">
               <input id="m" autocomplete="off" /><button>Send</button>
@@ -38,7 +38,7 @@
 		<script>
         
   			$(function () {
-          $(document).scrollTop($(document).height());
+          
 
     			var socket = io();
           var username = prompt("Your nickname:");
@@ -55,8 +55,9 @@
       			return false;
     			});
 			
-			socket.on('mensaje', function(msg){
-    				$('#messages').append($('<li>').text(msg));
+			socket.on('mensaje', function(data){
+    				$('#messages').append($('<li><strong>'+data.username+': '+'</strong>'+data.msg+'</li>'));
+            $(document).scrollTop($(document).height());
     			})
 
       socket.on('connUsers',function(msg) {
