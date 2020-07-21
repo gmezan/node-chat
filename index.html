@@ -19,7 +19,8 @@
 
     	<ul id="messages"></ul>
 
-			<div style="color:blue;"><h4> <span id="typing"></span></h4></div>
+			<div style="color:blue;position:relative;bottom:45px;left:20px;margin-top:20px;"><h5> <i id="typing"></i></h5></div>
+
     	<form action="">
       		<input id="m" autocomplete="off" /><button>Send</button>
     	</form>
@@ -51,6 +52,7 @@
 							.html(`<b>${username}: </b>${$('#m').val()}`));
 	      			$('#m').val('');
 						}
+						$(document).scrollTop($(document).height());
       			return false;
     			});
 
@@ -83,6 +85,7 @@
 						$.each(list,function(index,value){
 							$("#messages").append($('<li>')
 							.html(`<b>${value.user}: </b>${value.msg}`));
+							$(document).scrollTop($(document).height());
 						})
 					});
 

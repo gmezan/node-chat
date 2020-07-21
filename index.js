@@ -9,6 +9,14 @@ const defaultDB = { host: "database-3.csclycyj6wox.us-east-1.rds.amazonaws.com",
                     port: 3306,
                     database: "node_chat"
                   };
+/*
+
+                  { host: "localhost",
+                                      user: "gustavo",
+                                      password: "root", //administrador123
+                                      port: 3306,
+                                      database: "node_chat"
+                                    };*/
 
 //configs
 var app = express();
