@@ -3,9 +3,9 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 const mysql = require("mysql2");
-const defaultDB = { host: "database-1.csclycyj6wox.us-east-1.rds.amazonaws.com",
+const defaultDB = { host: "database-3.csclycyj6wox.us-east-1.rds.amazonaws.com",
                     user: "administrador",
-                    password: "administrador123", //administrador123
+                    password: "administrador", //administrador123
                     port: 3306,
                     database: "node_chat"
                   };
@@ -46,6 +46,7 @@ io.on('connection', function(socket){
     n_users--;
     delete users[socket.id];
     io.emit('nUsers',n_users);
+    io.emit('lUsers',users);
     console.log("Disconnected user");
   });
 
