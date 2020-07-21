@@ -38,7 +38,9 @@ io.on('connection', function(socket){
   n_users++;
   io.emit('nUsers',n_users);
   conn.query(sqlInit, function(err, result) {
-    if(err) throw err;
+    if(err){
+      console.log("There was an error: " + err);
+    }
     io.to(socket.id).emit('init',result);
   });
 
@@ -46,7 +48,7 @@ io.on('connection', function(socket){
     n_users--;
     delete users[socket.id];
     io.emit('nUsers',n_users);
-    //io.emit('lUsers',users);
+    io.emit('lUsers',users);
     console.log("Disconnected user");
   });
 
@@ -54,7 +56,9 @@ io.on('connection', function(socket){
   		console.log("Mensaje del cliente: " + msg);
       socket.broadcast.emit('message_',{username: users[socket.id], msg: msg});
       conn.query(sqlInsert,[users[socket.id],msg], function(err, result) {
-        if(err) throw err;
+        if(err){
+          console.log("There was an error: " + err);
+        }
     });
   });
 
