@@ -19,7 +19,7 @@
 
     	<ul id="messages"></ul>
 
-			<div style="color:blue;position:absolute;bottom:0; "><h4> <span id="typing"></span></h4></div>
+			<div style="color:blue;position:absolute;bottom:46px;"><h4> <span id="typing"></span></h4></div>
     	<form action="">
       		<input id="m" autocomplete="off" /><button>Send</button>
     	</form>
@@ -46,10 +46,12 @@
 					});
 
     			$('form').submit(function(){
-      			socket.emit('chat message', $('#m').val());
-						$("#messages").append($('<li>')
-						.html(`<b>${username}: </b>${$('#m').val()}`));
-      			$('#m').val('');
+      			if($('#m').val().length>0){
+							socket.emit('chat message', $('#m').val());
+							$("#messages").append($('<li>')
+							.html(`<b>${username}: </b>${$('#m').val()}`));
+	      			$('#m').val('');
+						}
       			return false;
     			});
 
