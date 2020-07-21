@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<link rel="shortcut icon" href="#" />
+	<head>
+    	<style>
+    		* { margin: 0; padding: 0; box-sizing: border-box; }
+      		body { font: 13px Helvetica, Arial; }
+      		form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      		form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      		form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      		#messages { list-style-type: none; margin-top: 0px; margin-right: 0px; margin-bottom: 41px; margin-left: 0px; padding: 0; }
+      		#messages li { padding: 5px 10px; }
+      		#messages li:nth-child(odd) { background: #eee; }
+    	</style>
+	</head>
+	<body>
+		<h1 style="color:black"><b>Node Chat</b></h1>
+		<div><h2>Connected users (<span id="nusers"></span>): <span style="color:red;" id="lusers"></span></h2></div>
+		<div style="color:blue;"><h4> <span id="typing"></span></h4></div>
+    	<ul id="messages"></ul>
+
+    	<form action="">
+      		<input id="m" autocomplete="off" /><button>Send</button>
+    	</form>
+	</body>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script>
+  			$(function () {
+					var username = prompt("Ingrese su nombre");
+					if(username == null || username == ""){
+							alert("Debe Ingresar un nombre para utilizar el chat, refresque la página");
+					}else{
+						var socket = io();
+						socket.emit('username', username);
+					}
+
+					$("#m").on('input',function(){
+							$("#typing").html(username + " is typing ...");
+							setTimeout(function(){
+								 $("#typing").html('');
+							 }, 2000);
+							socket.emit("typing");
+					});
+
+    			$('form').submit(function(){
+      			socket.emit('chat message', $('#m').val());
+						$("#messages").append($('<li>')
+						.html(`<b>${username}: </b>${$('#m').val()}`));
+      			$('#m').val('');
+      			return false;
+    			});
+
+					socket.on('message_',function(data){
+						$("#messages").append($('<li>')
+						.html(`<b>${data.username}: </b>${data.msg}`));
+						$(document).scrollTop($(document).height());
+					});
+
+					socket.on('nUsers',function(nn){
+						$("#nusers").html(nn);
+					});
+
+					socket.on('lUsers',function(ll){
+						r = '';
+						for(let key in ll){
+							r+=ll[key]+', ';
+						}
+						$("#lusers").html(r.substring(0,r.length-2));
+					});
+
+					socket.on('user_typing',function(zzz){
+						$("#typing").html(zzz);
+						setTimeout(function(){
+							 $("#typing").html('');
+						 }, 2000);
+					});
+
+					socket.on('init',function(list){
+						$.each(list,function(index,value){
+							$("#messages").append($('<li>')
+							.html(`<b>${value.user}: </b>${value.msg}`));
+						})
+					});
+
+ 			});
+
+		</script>
+
+</html>

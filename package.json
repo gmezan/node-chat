@@ -1,0 +1,26 @@
+{
+  "name": "node_chat",
+  "version": "1.0.0",
+  "description": "P",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gustavo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "mysql2": "^2.1.0",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmn14/node_chat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gmn14/node_chat/issues"
+  },
+  "homepage": "https://github.com/gmn14/node_chat#readme"
+}
