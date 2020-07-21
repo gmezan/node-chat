@@ -39,7 +39,7 @@
 					$("#m").on('input',function(){
 							$("#typing").html(username + " is typing ...");
 							setTimeout(function(){
-								 $("#typing").html('');
+								 $("#typing").html('Idle');
 							 }, 2000);
 							socket.emit("typing");
 					});
@@ -73,7 +73,7 @@
 					socket.on('user_typing',function(zzz){
 						$("#typing").html(zzz);
 						setTimeout(function(){
-							 $("#typing").html('');
+							 $("#typing").html('Idle');
 						 }, 2000);
 					});
 
