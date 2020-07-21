@@ -23,8 +23,8 @@ var users = {};
 const sqlInsert = "insert into chat (user,msg,datetime) values(?,?,now())";
 const sqlInit = "select * from chat where datetime >= date_sub(now(), interval 5 minute)";
 //server init
-server.listen(3000, function() {
-    console.log("Server running on port 3000");
+server.listen(80, function() {
+    console.log("Server running on port 80");
 });
 
 //express routes
