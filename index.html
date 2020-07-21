@@ -11,16 +11,23 @@
       		#messages { list-style-type: none; margin-top: 0px; margin-right: 0px; margin-bottom: 41px; margin-left: 0px; padding: 0; }
       		#messages li { padding: 5px 10px; }
       		#messages li:nth-child(odd) { background: #eee; }
+
+					.navbar {
+					  overflow: hidden;
+					  position: fixed; /* Set the navbar to fixed position */
+					  top: 0; /* Position the navbar at the top of the page */
+					  width: 100%; /* Full width */
+					}
     	</style>
 	</head>
 	<body>
-		<div style="position:relative;top:10px;">
+		<div class="navbar" >
 			<h1 style="color:black"><b>Node Chat</b></h1>
 			<div><h2>Connected users (<span id="nusers"></span>): <span style="color:red;" id="lusers"></span></h2></div>
 		</div>
     	<ul id="messages"></ul>
 
-			<div style="color:blue;position:relative;bottom:45px;left:20px;margin-top:20px;"><h5> <i id="typing"></i></h5></div>
+			<div style="color:blue;position:relative;bottom:42px;left:20px;margin-top:20px;"><h5> <i id="typing"></i></h5></div>
 
     	<form action="">
       		<input id="m" autocomplete="off" /><button>Send</button>
