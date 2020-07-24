@@ -1,2 +1,3 @@
-# Simple web chat with Node.js
+# Simple Web chat Application with Node.js
 
+![image](chat.png)
